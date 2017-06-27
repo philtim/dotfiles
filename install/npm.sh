@@ -52,6 +52,8 @@ packages=(
     nodemon
     svgo
     yo
+    yarn
+    commitizen
 )
 
 npm install -g "${packages[@]}"

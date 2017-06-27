@@ -26,7 +26,7 @@
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
 CURRENT_BG='NONE'
-SEGMENT_SEPARATOR='⮀'
+SEGMENT_SEPARATOR='\ue0b0'
 
 ONLINE='%{%F{green}%}◉'
 OFFLINE='%{%F{red}%}⦿'
@@ -113,20 +113,16 @@ prompt_status() {
   [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
 }
 
-function battery_charge {
-  echo `~/bin/batcharge.py`
-}
-
 ## Main prompt
 build_prompt() {
   RETVAL=$?
   prompt_status
-  prompt_git
   prompt_dir
+  prompt_git
   prompt_end
 }
 
-RPROMPT='$(prompt_online) $(battery_charge)'
+RPROMPT='$(prompt_online)'
 
 PROMPT='%{%f%b%k%}$(build_prompt)
 » '

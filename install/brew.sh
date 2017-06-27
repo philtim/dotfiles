@@ -14,7 +14,6 @@ fi
 
 brew tap homebrew/versions
 brew tap homebrew/dupes
-brew tap Goles/battery
 
 # Make sure we’re using the latest Homebrew
 brew update
@@ -52,8 +51,6 @@ apps=(
     moreutils
     findutils
     ffmpeg
-    fortune
-    ponysay
     git
     git-extras
     hub
@@ -71,7 +68,6 @@ apps=(
     tree
     ffmpeg --with-libvpx
     wget
-    wifi-password
 )
 
 brew install "${apps[@]}"
