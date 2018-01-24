@@ -1,5 +1,6 @@
 # A good list of alises http://haacked.com/archive/2014/07/28/github-flow-aliases/
 [alias]
+        git = !git
         # Staging
         a = add
         aa = add --all
@@ -148,12 +149,13 @@
       git tag -d "$1" &> /dev/null; \
       git tag $1; \
   }; f"
+	clean-branches = git branch | grep -v 'master' | xargs git branch | grep -v master | xargs git branch -D
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # So much color
 [color]
-        ui = always
+        ui = auto
 
 [color "branch"]
         current = green bold
@@ -182,7 +184,7 @@
         tool = opendiff
 
 [core]
-        editor = nano
+	editor = vim
         abbrev = 12
         attributesfile = ~/.gitattributes
         excludesfile = ~/.gitignore
@@ -254,3 +256,6 @@
 
 [fetch]
         prune = true
+[user]
+	name = Philipp Timmalog
+	email = ptimmalog@gmail.com

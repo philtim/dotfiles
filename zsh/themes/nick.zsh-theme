@@ -82,7 +82,7 @@ prompt_git() {
     else
       prompt_segment green black
     fi
-    echo -n "${ref/refs\/heads\//⭠ }$dirty"
+    echo -n "${ref/refs\/heads\//\ue0a0 }$dirty"
   fi
 }
 
@@ -121,8 +121,6 @@ build_prompt() {
   prompt_git
   prompt_end
 }
-
-RPROMPT='$(prompt_online)'
 
 PROMPT='%{%f%b%k%}$(build_prompt)
 » '
