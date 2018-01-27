@@ -9,6 +9,7 @@ dirs_to_prepend=(
   "/usr/local/sbin"
   "/usr/local/git/bin"
   "/usr/local/"
+  "/usr/local/opt/sqlite/bin"
   "/usr/local/mysql/bin"
   "$HOME/bin"
   "/usr/local/lib/python2.7/site-packages"
@@ -94,3 +95,5 @@ source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(rbenv init -)"
