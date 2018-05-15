@@ -54,6 +54,8 @@
         # Stash
         st = stash
         stp = stash pop
+        stshow = "!f() { git stash show stash^{/$*} -p; }; f"
+        sta = "!f() { git stash apply stash^{/$*}; }; f"
 
         # Status/Logging
         s = status
