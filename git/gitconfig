@@ -245,7 +245,7 @@
         # Make `git push` automatically push relevant
         # annotated tags when pushing branches out
         followTags = true
-        default = current
+	default = current
 
 # Use separate file for username / github token / etc
 [include]
@@ -261,3 +261,5 @@
 [user]
 	name = Philipp Timmalog
 	email = ptimmalog@gmail.com
+[http]
+	sslVerify = false
