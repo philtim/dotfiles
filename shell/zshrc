@@ -16,7 +16,9 @@ dirs_to_prepend=(
   "$HOME/bin"
   "/usr/local/lib/python2.7/site-packages"
   "$HOME/.gem/ruby/2.5.0/bin"
-  "$JAVA_HOME"
+  "$JAVA_HOME",
+  "/usr/local/opt/icu4c/bin",
+  "/usr/local/opt/icu4c/sbin"
 )
 
 for dir in ${(k)dirs_to_prepend[@]}
@@ -102,4 +104,25 @@ unsetopt correct_all
 eval "$(rbenv init -)"
 
 export NVM_DIR="$HOME/.nvm"
-  . "/usr/local/opt/nvm/nvm.sh"
+#  . "/usr/local/opt/nvm/nvm.sh"
+
+nvm() {
+  unset -f nvm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  nvm "$@"
+}
+
+node() {
+  unset -f node
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  node "$@"
+}
+
+npm() {
+  unset -f npm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  npm "$@"
+}

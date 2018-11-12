@@ -82,78 +82,24 @@
         go = !git checkout $1 && pull
         master = !git checkout master && pull
         develop = !git checkout develop && pull
-        mmm = !git fetch origin master && git rebase origin/master
-        ddd = !git fetch origin develop && git rebase origin/develop
+        mmm = !git fetch origin master && git rebase -i origin/master
+        ddd = !git fetch origin develop && git rebase -i origin/develop
 
         # Misc
         publish = "!git push --set-upstream origin $(git branch-name)"
 
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # List remote branches
+        lrb = "!f() { \
+            remote="${1:-origin}"; \
+            git ls-remote --heads "$remote"; \
+        }; f"
 
-  # Find commits by source code
 
-  cc = "!f() { \
-      git log --pretty=custom --decorate --date=short -S\"$1\"; \
-  }; f"
+        # Find commits by commit message
+        cm = "!f() { \
+            git log --pretty=custom --decorate --date=short --grep=\"$1\"; \
+        }; f"
 
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  # Find commits by commit message
-
-  cm = "!f() { \
-      git log --pretty=custom --decorate --date=short --grep=\"$1\"; \
-  }; f"
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  # Credit an author on the latest commit
-
-  credit = "!f() { \
-      if [ -n \"$1\" ] && [ -n \"$2\" ]; then \
-          git commit --amend --author \"$1 <$2>\" -C HEAD; \
-      fi \
-  }; f"
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  # List remote branches
-
-  lrb = "!f() { \
-      remote="${1:-origin}"; \
-      git ls-remote --heads "$remote"; \
-  }; f"
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  # Merge GitHub pull request on top of the current branch or,
-  # if a branch name is specified, on top of the specified branch
-
-  mpr = "!f() { \
-      declare currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
-      declare branch=\"${2:-$currentBranch}\"; \
-      if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
-          git fetch origin refs/pull/$1/head:pr/$1 && \
-          git checkout -B $branch && \
-          git rebase $branch pr/$1 && \
-          git checkout -B $branch && \
-          git merge pr/$1 && \
-          git branch -D pr/$1 && \
-          git commit --amend -m \"$(git log -1 --pretty=%B)\n\nClose #$1\"; \
-      fi \
-  }; f"
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  # Remove the tag with the specified tag name if
-  # exists and tag the latest commit with that name
-
-  retag = "!f() { \
-      git tag -d "$1" &> /dev/null; \
-      git tag $1; \
-  }; f"
-	clean-branches = git branch | grep -v 'master' | xargs git branch | grep -v master | xargs git branch -D
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # So much color
 [color]
@@ -260,6 +206,15 @@
         prune = true
 [user]
 	name = Philipp Timmalog
-	email = ptimmalog@gmail.com
+	email = phil@t7lab.com
 [http]
-	sslVerify = false
+	sslverify = false
+[merge]
+    tool = phpstorm
+[mergetool "phpstorm"]
+    cmd = pstorm merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
+    trustExitCode = true
+[diff]
+    tool = phpstorm
+[difftool "phpstorm"]
+    cmd = pstorm diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")

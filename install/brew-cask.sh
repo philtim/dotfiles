@@ -8,19 +8,18 @@ brew tap caskroom/versions
 # Install packages
 apps=(
     dropbox
-    google-drive
     dash
     imageoptim
     iterm2
-    atom
+    visual-studio-code
     phpstorm
+    sublime-text
+    sublime-merge
+    postman
     firefox
     firefoxnightly
     google-chrome
     google-chrome-canary
-    screenflow
-    spotify
-    skype
     slack
     sketch
     transmit

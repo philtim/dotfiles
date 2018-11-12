@@ -188,7 +188,7 @@ alias reloadShell="source ~/.zshrc && echo 'Shell config reloaded from ~/.zshrc'
 alias localrc="if [[ -a ~/.zsh.local ]]; then ${EDITOR} ~/.zsh.local; fi"
 
 # Update installed Ruby gems, Homebrew, npm, and their installed packages
-alias brew_update="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew prune;"
+alias brew_update="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew prune;"
 alias update='sudo softwareupdate -i -a; brew_update; npm install npm -g; npm update -g; gem update --system; gem update --no-rdoc --no-ri --user-install'
 
 # HTTP Requests. One of @janmoesen’s ProTip™s
