@@ -56,7 +56,39 @@ export PATH
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="nick"
+ZSH_THEME="spaceship"
+
+
+
+SPACESHIP_PROMPT_ORDER=(
+    time          # Time stampts section
+    dir           # Current directory section
+    host          # Hostname section
+    git           # Git section (git_branch + git_status)
+    package       # Package version
+    docker        # Docker section
+    aws           # Amazon Web Services section
+    venv          # virtualenv section
+    pyenv         # Pyenv section
+    ember         # Ember.js section
+    kubecontext   # Kubectl context section
+    terraform     # Terraform workspace section
+    line_sep      # Line break
+    #vi_mode       # Vi-mode indicator
+    #jobs          # Background jobs indicator
+    #exit_code     # Exit code section
+    char          # Prompt character
+  )
+
+  SPACESHIP_GIT_BRANCH_COLOR="green"
+  export SPACESHIP_GIT_STATUS_ADDED="%F{blue}+%F{red}"
+  export SPACESHIP_GIT_STATUS_UNTRACKED="%F{green}?%F{red}"
+  export SPACESHIP_GIT_STATUS_DELETED="%F{red}x%F{red}"
+  export SPACESHIP_GIT_STATUS_MODIFIED="%F{yellow}!%F{red}"
+
+  SPACESHIP_CHAR_SYMBOL="$ "
+  #SPACESHIP_PACKAGE_SYMBOL=""
+  SPACESHIP_NODE_SYMBOL=""
 
 # Z beats cd most of the time
 source "$(brew --prefix)/etc/profile.d/z.sh"
@@ -111,6 +143,7 @@ fi
 # chpwd_functions=( auto-ls $chpwd_functions )
 
 source $ZSH/oh-my-zsh.sh
+source ~/bin/tmuxinator.zsh
 
 # Source local extra (private) settings specific to machine if it exists
 [ -f ~/.zsh.local ] && source ~/.zsh.local
@@ -145,3 +178,7 @@ npm() {
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   npm "$@"
 }
+
+  # Set Spaceship ZSH as a prompt
+  autoload -U promptinit; promptinit
+  prompt spaceship
