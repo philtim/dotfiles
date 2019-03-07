@@ -1,0 +1,23 @@
+# /Users/e-timmaphi/.config/tmuxinator/saleor.yml
+
+name: saleor
+root: ~/Development/Siemens/
+
+windows:
+  - frontend:
+      root: ~/Development/Siemens/saleor-frontend
+      layout: main-horizontal
+      panes:
+        - code .
+        - cd source && clear && glp10
+        - cd source && clear && yarn run serve
+  - backend:
+      root: ~/Development/Siemens/saleor-backend
+      layout: main-horizontal
+      panes:
+        - code .
+        - glp10
+        - serve:
+            - source develop/bin/activate
+            - export SECRET_KEY='saleor-key'
+            - python manage.py runserver

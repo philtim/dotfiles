@@ -114,8 +114,7 @@ function git_list_branches() {
 alias gss="git status -s"
 alias gp="git push origin HEAD"
 alias gpt="git push origin HEAD && git push --tags"
-alias wip="git commit -m'WIP' . && git push origin HEAD"
-alias grok="ngrok start rem.jsbin-dev.com static.rem.jsbin-dev.com learn.rem.jsbin-dev.com"
+alias wip="git add . && git commit -m 'WIP' && git push origin HEAD"
 alias gl='git log'
 alias glp10='git log -10 --pretty --oneline' # view your last 5 latest commits each on their own line
 alias glt='git log --all --graph --decorate --oneline --simplify-by-decoration' # pretty branch status
@@ -204,8 +203,3 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 # Show/hide all desktop icons (useful when presenting)
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-
-# Start new instance of chrome for google music
-alias music="~/bin/newchrome -o 'http://music.google.com' music"
-alias basecamp="~/bin/newchrome -o 'https://3.basecamp.com/3270876/projects' basecamp"
-
