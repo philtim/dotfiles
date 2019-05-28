@@ -6,7 +6,7 @@ export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk"
 # Set ruby version
 export PATH="/Users/e-timmaphi/.rbenv/shims:${PATH}"
 export RBENV_SHELL=zsh
-source '/usr/local/Cellar/rbenv/1.1.1/libexec/../completions/rbenv.zsh'
+# source '/usr/local/Cellar/rbenv/1.1.1/libexec/../completions/rbenv.zsh'
 command rbenv rehash 2>/dev/null
 rbenv() {
   local command

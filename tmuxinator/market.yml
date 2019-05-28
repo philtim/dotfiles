@@ -13,7 +13,7 @@ root: ~/Development/mb.io/vue-platform/platform-core
 # Runs on project start, always
 # on_project_start: command
 # Run on project start, the first time
-# on_project_first_start: command
+on_project_first_start: cd ~/Development/mb.io/vue-platform && pstorm .
 # Run on project start, after the first time
 # on_project_restart: command
 # Run on project exit ( detaching from tmux session )
@@ -43,14 +43,26 @@ root: ~/Development/mb.io/vue-platform/platform-core
 # post: tmux -CC attach -t core-mock
 
 windows:
-  - editor:
-      layout: main-horizontal
+  - serve:
+      root: ~/Development/mb.io/vue-platform
+      layout: even-vertical
       panes:
-        - code .
-        - gs
-        - glp
-  - mock:
-      layout: main-vertical
+        - cd marketplace && npm run serve:mock
+        - cd platform-core && npm run mock
+  - deps:
+      root: ~/Development/mb.io/vue-platform
+      layout: even-vertical
       panes:
-        - npm run serve:mock
-        - npm run mock
+        - cd marketplace && git fetch && glp10
+        - cd marketplace-portugal && git fetch && glp10
+        - cd platform-core && git fetch && glp10
+        - cd assortment-accessories && git fetch && glp10
+        - cd assortment-cars && git fetch && glp10
+  - configs:
+      root: ~/Development/mb.io/vue-platform
+      layout: even-vertical
+      panes:
+        - cd marketplace && git fetch && glp10
+        - cd platform-core && git fetch && glp10
+        - cd assortment-accessories && git fetch && glp10
+        - cd assortment-cars && git fetch && glp10

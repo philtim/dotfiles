@@ -144,7 +144,6 @@
         # Insanely beautiful diffs ==> npm install -g diff-so-fancy
         diff = diff-so-fancy | less --tabs=4 -RFX
         show = diff-so-fancy | less --tabs=4 -RFX
-        log = false
 
 [diff "bin"]
         # Use `hexdump` to diff binary files
@@ -219,3 +218,5 @@
     tool = phpstorm
 [difftool "phpstorm"]
     cmd = pstorm diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+[credential]
+	helper = osxkeychain

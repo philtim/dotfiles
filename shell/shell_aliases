@@ -116,7 +116,7 @@ alias gp="git push origin HEAD"
 alias gpt="git push origin HEAD && git push --tags"
 alias wip="git add . && git commit -m 'WIP' && git push origin HEAD"
 alias gl='git log'
-alias glp10='git log -10 --pretty --oneline' # view your last 5 latest commits each on their own line
+alias glp10='git --no-pager log -10 --pretty --oneline' # view your last 5 latest commits each on their own line
 alias glt='git log --all --graph --decorate --oneline --simplify-by-decoration' # pretty branch status
 alias glsw='git log -S' # search the commit history for the word puppy and display matching commits (glsw [word])
 alias gs='git status'
@@ -148,6 +148,60 @@ alias undopush="git push -f origin HEAD^:master"
 
 # `cd` to Git repo root
 alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup || pwd`'
+
+# docker and docker-compose alias
+dkln() {
+  docker logs -f `docker ps | grep $1 | awk '{print $1}'`
+}
+
+dkclean() {
+  docker rm $(docker ps --all -q -f status=exited)
+  docker volume rm $(docker volume ls -qf dangling=true)
+}
+
+dkprune() {
+  docker system prune -af
+}
+
+dktop() {
+  docker stats --format "table {{.Container}}\t{{.Name}}\t{{.CPUPerc}}  {{.MemPerc}}\t{{.NetIO}}\t{{.BlockIO}}"
+}
+
+dkstats() {
+  if [ $# -eq 0 ]
+    then docker stats --no-stream;
+    else docker stats --no-stream | grep $1;
+  fi
+}
+
+dke() {
+  docker exec -it $1 /bin/sh
+}
+
+dkexe() {
+  docker exec -it $1 $2
+}
+
+dkreboot() {
+  osascript -e 'quit app "Docker"'
+  countdown 2
+  open -a Docker
+  echo "Restarting Docker engine"
+  countdown 120
+}
+
+dkstate() {
+  docker inspect $1 | jq .[0].State
+}
+
+alias dc="docker-compose"
+alias dk="docker"
+alias dkps="docker ps"
+alias dkpss="docker ps --format '{{.ID}} | {{.Names}} | {{.Status}} | {{.Image}}'"
+alias dkl="docker logs"
+alias dklf="docker logs -f"
+alias dki="docker images"
+alias dkt='docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}"'
 
 # Gist
 alias gist-paste="gist --private --copy --paste --filename"  # gist-paste filename.ext -- create private Gist from the clipboard contents
@@ -188,8 +242,8 @@ alias reloadShell="source ~/.zshrc && echo 'Shell config reloaded from ~/.zshrc'
 alias localrc="if [[ -a ~/.zsh.local ]]; then ${EDITOR} ~/.zsh.local; fi"
 
 # Update installed Ruby gems, Homebrew, npm, and their installed packages
-alias brew_update="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew prune;"
-alias update='sudo softwareupdate -i -a; brew_update; npm install npm -g; npm update -g; gem update --system; gem update --no-rdoc --no-ri --user-install'
+alias brew_update="brew -v update; brew upgrade --force-bottle; brew cleanup;"
+alias update='sudo softwareupdate -i -a; brew_update; npm install npm -g; npm update -g; gem update --system; gem update --no-ri --user-install'
 
 # HTTP Requests. One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
