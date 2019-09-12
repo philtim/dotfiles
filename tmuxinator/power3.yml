@@ -1,7 +1,7 @@
 # /Users/e-timmaphi/.config/tmuxinator/power3.yml
 
 name: power3
-root: ~/Development/Siemens/Power3
+root: ~/Development/Siemens/Power3/source/s3
 
 windows:
   - editor:
@@ -10,4 +10,8 @@ windows:
         - code .
         - git fetch && gs
         - glp10
-        - cd source/s3 && yarn run <%= @args[0] %>
+  - serve:
+      layout: main-horizontal
+      panes:
+        - npm run serve
+        - npm run serve:int

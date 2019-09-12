@@ -40,21 +40,20 @@ on_project_first_start: cd ~/Development/mb.io/vue-platform && pstorm .
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t core-mock
+# on_project_exit: tmux -CC attach -t core-mock
 
 windows:
   - serve:
       root: ~/Development/mb.io/vue-platform
       layout: even-vertical
       panes:
-        - cd marketplace && npm run serve:mock
-        - cd platform-core && npm run mock
+        - cd marketplace-mars-fe && npm run serve:mock
+        - cd marketplace-mars-fe && npm run mock
   - deps:
       root: ~/Development/mb.io/vue-platform
       layout: even-vertical
       panes:
-        - cd marketplace && git fetch && glp10
-        - cd marketplace-portugal && git fetch && glp10
+        - cd marketplace-mars-fe && git fetch && glp10
         - cd platform-core && git fetch && glp10
         - cd assortment-accessories && git fetch && glp10
         - cd assortment-cars && git fetch && glp10
@@ -62,7 +61,7 @@ windows:
       root: ~/Development/mb.io/vue-platform
       layout: even-vertical
       panes:
-        - cd marketplace && git fetch && glp10
+        - cd marketplace-mars-fe && git fetch && glp10
         - cd platform-core && git fetch && glp10
         - cd assortment-accessories && git fetch && glp10
         - cd assortment-cars && git fetch && glp10
