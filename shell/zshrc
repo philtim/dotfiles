@@ -120,7 +120,7 @@ ZSH_CUSTOM=$HOME/dotfiles/zsh
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(osx brew node yarn zsh-syntax-highlighting)
+plugins=(osx brew node yarn zsh-syntax-highlighting fzf)
 
 # User configuration
 
@@ -182,3 +182,6 @@ npm() {
   # Set Spaceship ZSH as a prompt
   autoload -U promptinit; promptinit
   prompt spaceship
+
+export FZF_BASE="/usr/local/bin/fzf"
+export FZF_DEFAULT_COMMAND='rg --files --follow --hidden'
